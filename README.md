@@ -18,7 +18,7 @@ Maintained by **Karmendra Pandey**. MIT licensed.
 ## Install
 
 ```bash
-pip install mcplens        # (PyPI release pending; for now install from source)
+pip install mcplens-scanner        # (PyPI release pending; for now install from source)
 git clone https://github.com/karmendra8386/mcplens && cd mcplens
 pip install -e .
 ```

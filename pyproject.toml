@@ -3,7 +3,7 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "mcplens"
+name = "mcplens-scanner"
 version = "0.1.0"
 description = "MCP server security scanner with runtime behavioral verification — checks that tools actually do what their descriptions claim."
 readme = "README.md"
