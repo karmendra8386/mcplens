@@ -21,6 +21,14 @@ Maintained by **Karmendra Pandey**. MIT licensed.
 
 *Live scans (Nov 9, 2026): TicketDesk — a real, read-only MCP server — grades **A (100/100)** with zero findings, while the deliberately vulnerable fixture in `fixtures/` grades **F (0/100)**: static rules catch its poisoned tool description, and the runtime probes catch what static reading cannot — a "read-only" tool returning canary credentials and writing to the filesystem. Full reports and the script that produced them are in [`demo/`](demo/).*
 
+## Works with
+
+- **[Argus](https://github.com/karmendra8386/argus)** — the gateway mcplens vets servers for. The TicketDesk server in the demo above was built for the Argus Chat showcase: mcplens graded it **A**, and it mounts on that grade. Feeding the grade into Argus's allow/deny path is Step 4 of the Argus Chat build — the chain (tool server → grade → gateway) is the design.
+- **[Argus Lens](https://github.com/karmendra8386/argus-lens)** — the same don't-trust-the-claim stance at the other surface: Lens checks prompts in the browser before they are sent; mcplens checks MCP servers before they are trusted.
+- **[tokenecon](https://github.com/karmendra8386/agentic-ai-token-economics)** — the cost-side sibling: mcplens answers "is this server safe to connect?", tokenecon answers "what will the run cost?".
+
+**The connected set** — one thread through all of it: what an agent did, what it cost, and whether it should have been allowed. [Argus](https://github.com/karmendra8386/argus) · [tokenecon](https://github.com/karmendra8386/agentic-ai-token-economics) · [mcplens](https://github.com/karmendra8386/mcplens) · [agent-cost-mcp-server](https://github.com/karmendra8386/agent-cost-mcp-server) · [Argus Lens](https://github.com/karmendra8386/argus-lens) · [PersistAIBench](https://github.com/karmendra8386/persistbench-bench) · [Argus-Bench](https://doi.org/10.5281/zenodo.23877366)
+
 ## Install
 
 ```bash
