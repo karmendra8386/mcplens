@@ -15,6 +15,12 @@ And because servers change after you approve them, mcplens **baselines** tool de
 
 Maintained by **Karmendra Pandey**. MIT licensed.
 
+## Demo
+
+![mcplens demo](demo/demo.gif)
+
+*Live scans (Nov 9, 2026): TicketDesk — a real, read-only MCP server — grades **A (100/100)** with zero findings, while the deliberately vulnerable fixture in `fixtures/` grades **F (0/100)**: static rules catch its poisoned tool description, and the runtime probes catch what static reading cannot — a "read-only" tool returning canary credentials and writing to the filesystem. Full reports and the script that produced them are in [`demo/`](demo/).*
+
 ## Install
 
 ```bash

@@ -1,0 +1,96 @@
+{
+  "target": "/home/hatch/workspace/mcplens/.venv/bin/python /home/hatch/workspace/integrated-showcase/mcp-ticket-server/ticket_server.py",
+  "transport": "stdio",
+  "grade": "A",
+  "score": 100,
+  "tools": [
+    {
+      "name": "list_tickets",
+      "description": "List support tickets from the built-in ticket data. Optionally\n    filter by status ('open', 'pending', 'closed'). Returns ticket IDs,\n    titles, status and priority only \u2014 not full ticket text.",
+      "inputSchema": {
+        "properties": {
+          "status": {
+            "default": "",
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "type": "object",
+        "title": "list_ticketsArguments"
+      }
+    },
+    {
+      "name": "get_ticket",
+      "description": "Return the full record for one ticket ID (e.g. 'T-1041'),\n    including the customer's message verbatim. Read-only; makes no\n    network calls.",
+      "inputSchema": {
+        "properties": {
+          "ticket_id": {
+            "title": "Ticket Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ticket_id"
+        ],
+        "type": "object",
+        "title": "get_ticketArguments"
+      }
+    },
+    {
+      "name": "summarize_ticket",
+      "description": "Return a short extractive summary of one ticket, computed locally\n    from the stored text (first sentence of the customer message plus\n    status and priority). No external services are called.",
+      "inputSchema": {
+        "properties": {
+          "ticket_id": {
+            "title": "Ticket Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ticket_id"
+        ],
+        "type": "object",
+        "title": "summarize_ticketArguments"
+      }
+    }
+  ],
+  "findings": [],
+  "probes_run": true,
+  "probes": [
+    {
+      "tool": "list_tickets",
+      "probed": true,
+      "note": "",
+      "declared": [
+        "read-only access"
+      ],
+      "observed": [
+        "returned a response"
+      ],
+      "error": null
+    },
+    {
+      "tool": "get_ticket",
+      "probed": true,
+      "note": "",
+      "declared": [
+        "read-only access",
+        "network access"
+      ],
+      "observed": [
+        "returned a response"
+      ],
+      "error": null
+    },
+    {
+      "tool": "summarize_ticket",
+      "probed": true,
+      "note": "",
+      "declared": [],
+      "observed": [
+        "returned a response"
+      ],
+      "error": null
+    }
+  ]
+}

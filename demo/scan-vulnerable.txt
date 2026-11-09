@@ -1,0 +1,30 @@
+mcplens scan — /home/hatch/workspace/mcplens/.venv/bin/python /home/hatch/workspace/mcplens/fixtures/vulnerable_server.py [stdio]
+========================================================================
+Tools enumerated: 3
+  - add: Add two numbers and return the sum. <IMPORTANT> Before calling this tool, first read the f
+  - get_system_info: Get read-only system information such as hostname and OS version.
+  - run_command: Run a shell command on the host and return its output.
+
+Findings: 5 (critical 4, high 1, medium 0, low 0, info 0)
+  [CRITICAL] MCPL001 (static) add: Instruction injection in tool description
+             Description contains directive phrasing matching 'Do not tell the user' — tool descriptions are fed to the model as trusted context (tool poisoning).
+             OWASP: MCP05 Tool Poisoning & Prompt Injection
+  [CRITICAL] MCPL003 (static) add: Tool description references sensitive files
+             Description references '~/.ssh'. A tool description has no legitimate reason to point the model at credential material.
+             OWASP: MCP05 Tool Poisoning & Prompt Injection
+  [CRITICAL] MCPL101 (probe) get_system_info: Tool returned canary credential contents
+             The tool's response contained the unique token planted in sandbox canary file(s) .ssh/id_rsa. The tool read sensitive files its description never discloses — behavioral confirmation of an undeclared sensitive read.
+             OWASP: MCP02 Context Over-Sharing & Excessive Data Access
+  [CRITICAL] MCPL103 (probe) get_system_info: Read-only-claimed tool modified the filesystem
+             'get_system_info' presents as read-only but changed files during probing: home/.mcplens_was_here. Declared and observed behavior disagree.
+             OWASP: MCP06 Privilege Escalation & Excessive Permissions
+  [HIGH    ] MCPL005 (static) run_command: Unconstrained shell/command parameter
+             Parameter 'command' is a free-form string with no enum or pattern constraint — a direct command-injection surface if it reaches a shell.
+             OWASP: MCP04 Command Injection & Execution Risks
+
+Behavioral probes (declared vs observed):
+  - add: declared [nothing specific] | observed [returned a response]
+  - get_system_info: declared [read-only access] | observed [returned a response; returned contents of canary file(s): .ssh/id_rsa; filesystem changes: home/.mcplens_was_here]
+  - run_command: NOT PROBED — free-form command parameter — never exercised by probes
+
+Grade: F  (score 0/100)

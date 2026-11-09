@@ -1,0 +1,16 @@
+mcplens scan — /home/hatch/workspace/mcplens/.venv/bin/python /home/hatch/workspace/integrated-showcase/mcp-ticket-server/ticket_server.py [stdio]
+========================================================================
+Tools enumerated: 3
+  - list_tickets: List support tickets from the built-in ticket data. Optionally
+  - get_ticket: Return the full record for one ticket ID (e.g. 'T-1041'),
+  - summarize_ticket: Return a short extractive summary of one ticket, computed locally
+
+Findings: 0 (critical 0, high 0, medium 0, low 0, info 0)
+  (none)
+
+Behavioral probes (declared vs observed):
+  - list_tickets: declared [read-only access] | observed [returned a response]
+  - get_ticket: declared [read-only access, network access] | observed [returned a response]
+  - summarize_ticket: declared [nothing specific] | observed [returned a response]
+
+Grade: A  (score 100/100)
